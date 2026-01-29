@@ -14,7 +14,7 @@ provider "google" {
 }
 
 resource "google_storage_bucket" "terraform_bucket" {
-  name          = "winged-amp-485617-a3-terraform-bucket"
+  name          = "terraform-demo-bucket-winged-amp-485617-a3"
   location      = "EUROPE-WEST8"
   force_destroy = true
 
@@ -26,4 +26,10 @@ resource "google_storage_bucket" "terraform_bucket" {
       type = "AbortIncompleteMultipartUpload"
     }
   }
+}
+
+resource "google_bigquery_dataset" "terraform_dataset" {
+  dataset_id = "terraform_demo_dataset"
+  location   = "EUROPE-WEST8"
+
 }
