@@ -8,14 +8,14 @@ terraform {
 }
 
 provider "google" {
-  credentials = file("/workspaces/data-engineering-zoomcamp-module-1/terraform/credentials.json")
-  project     = "winged-amp-485617-a3"
-  region      = "europe-west8"
+  credentials = var.credentials
+  project     = var.project
+  region      = var.location
 }
 
 resource "google_storage_bucket" "terraform_bucket" {
-  name          = "terraform-demo-bucket-winged-amp-485617-a3"
-  location      = "EUROPE-WEST8"
+  name          = var.gcs_bucket_name
+  location      = var.location
   force_destroy = true
 
   lifecycle_rule {
@@ -29,7 +29,7 @@ resource "google_storage_bucket" "terraform_bucket" {
 }
 
 resource "google_bigquery_dataset" "terraform_dataset" {
-  dataset_id = "terraform_demo_dataset"
-  location   = "EUROPE-WEST8"
+  dataset_id = var.bq_dataset_name
+  location   = var.location
 
 }
